@@ -1,0 +1,17 @@
+import org.slf4j.LoggerFactory
+import org.slf4j.Logger
+import com.haibao.xrules.service.impl.RuleEngineServiceImpl
+import com.haibao.xrules.model.*
+
+dialect  "java"
+rule "paramcheck1"
+    salience 99
+    when queryParam : QueryParam(paramId != null && paramSign.equals("+"))
+        resultParam : RuleResult()
+    then
+        final Logger LOGGER = LoggerFactory.getLogger("param-check-one 规则引擎") ;
+        LOGGER.info("参数:getParamId="+queryParam.getParamId()+";getParamSign="+queryParam.getParamSign());
+        RuleEngineServiceImpl ruleEngineService = new RuleEngineServiceImpl() ;
+        ruleEngineService.executeAddRule(queryParam);
+        resultParam.setPostCodeResult(true);
+end

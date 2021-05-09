@@ -98,6 +98,7 @@ public class LettuceRedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashKeySerializer(stringSerializer);
         // Hash value序列化
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

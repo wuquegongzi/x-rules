@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class XRulesApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(XRulesApplication.class, args);
     }
 

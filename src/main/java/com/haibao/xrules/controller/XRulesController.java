@@ -1,10 +1,13 @@
 package com.haibao.xrules.controller;
 
+import com.haibao.xrules.model.BlackList;
 import com.haibao.xrules.model.QueryParam;
 import com.haibao.xrules.model.RuleResult;
 import com.haibao.xrules.model.User;
+import com.haibao.xrules.service.BlackListService;
 import com.haibao.xrules.service.RuleEngineService;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import org.kie.api.runtime.KieSession;
@@ -38,6 +41,14 @@ public class XRulesController {
     private KieSession kieSession;
     @Resource
     private RuleEngineService ruleEngineService ;
+
+    @Autowired
+    BlackListService blackListService;
+
+    @RequestMapping("/blacklist")
+    public List<BlackList> blacklist (){
+       return blackListService.queryAll();
+    }
 
     @RequestMapping("/param")
     public void param (){

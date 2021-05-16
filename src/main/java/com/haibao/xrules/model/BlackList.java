@@ -3,11 +3,14 @@ package com.haibao.xrules.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
- * 黑名单
+ * 黑名单，白名单，可疑名单
  */
 @Entity
 @Table( name ="BLACK_LIST" , schema = "")
@@ -15,6 +18,7 @@ public class BlackList implements Serializable {
 
   @Id
   @Column(name = "id" )
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   /**
    * 维度
@@ -34,7 +38,8 @@ public class BlackList implements Serializable {
   /**
    * 时间
    */
-  @Column(name = "time" )
+  @LastModifiedDate
+  @Column(name="time",columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",insertable = false,updatable = false)
   private java.sql.Timestamp time;
   /**
    * 详情
@@ -106,5 +111,30 @@ public class BlackList implements Serializable {
             ", time=" + time +
             ", detail='" + detail + '\'' +
             '}';
+  }
+
+
+  /**
+   * 维度枚举
+   */
+  public static enum EnumDimension {
+    //手机号
+    MOBILE,
+    //IP
+    IP,
+    //设备ID
+    DEVICEID;
+  }
+
+  /**
+   * 类型枚举
+   */
+  public static enum EnumType {
+    //黑名单
+    BLACK,
+    //白名单
+    WHITE,
+    //可疑名单
+    TEMP;
   }
 }

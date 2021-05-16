@@ -1,16 +1,17 @@
 package com.haibao.xrules.controller;
 
+import com.haibao.xrules.common.base.Result;
 import com.haibao.xrules.model.BlackList;
 import com.haibao.xrules.service.BlackListService;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * 名单
@@ -33,16 +34,10 @@ public class BlackListController {
      * @return
      */
     @GetMapping(path = "/queryall")
-    public ResponseEntity queryAll() {
-
-        try {
-            return ResponseEntity.ok(blackListService.queryAll());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
+    public Mono queryAll() {
+        final Mono<List<BlackList>> data = Mono.just(blackListService.queryAll());
+        return Result.ok(data);
     }
-
 
     /**
      * 名单添加
@@ -53,9 +48,8 @@ public class BlackListController {
      * @return
      */
     @PostMapping(value = "/add")
-    public ResponseEntity add(String dimension, String type, String value, String detail) {
+    public Mono add(String dimension, String type, String value, String detail) {
 
-        try {
             BlackList.EnumDimension enumDimension = BlackList.EnumDimension.valueOf(dimension.toUpperCase());
             if (enumDimension == null) {
                 throw new IllegalArgumentException();
@@ -71,11 +65,6 @@ public class BlackListController {
             blackList.setValue(value);
             blackList.setDetail(detail);
 
-            return ResponseEntity.ok(blackListService.pub(blackList));
-        } catch (Exception e) {
-            logger.error("add balcklist fail", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-
+            return Result.ok(Mono.just(blackListService.pub(blackList)));
     }
 }

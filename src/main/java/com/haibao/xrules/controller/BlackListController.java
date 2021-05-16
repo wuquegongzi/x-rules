@@ -1,6 +1,8 @@
 package com.haibao.xrules.controller;
 
 import com.haibao.xrules.common.base.Result;
+import com.haibao.xrules.common.enums.ResultStatusEnum;
+import com.haibao.xrules.common.exception.ServiceException;
 import com.haibao.xrules.model.BlackList;
 import com.haibao.xrules.service.BlackListService;
 import java.util.List;
@@ -51,12 +53,9 @@ public class BlackListController {
     public Mono add(String dimension, String type, String value, String detail) {
 
             BlackList.EnumDimension enumDimension = BlackList.EnumDimension.valueOf(dimension.toUpperCase());
-            if (enumDimension == null) {
-                throw new IllegalArgumentException();
-            }
             BlackList.EnumType enumType = BlackList.EnumType.valueOf(type.toUpperCase());
-            if (enumType == null) {
-                throw new IllegalArgumentException();
+            if (null == enumDimension || null == enumType) {
+                throw new ServiceException(ResultStatusEnum.MISSING_REQUEST_PARAM_ERROR);
             }
 
             BlackList blackList = new BlackList();

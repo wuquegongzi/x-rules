@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table( name ="SYS_CONFIG" , schema = "")
@@ -22,7 +23,8 @@ public class SysConfig {
   @Column(name = "value" )
   private String value;
 
-  @Column(name = "time" )
+  @LastModifiedDate
+  @Column(name="time",columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",insertable = false,updatable = false)
   private java.sql.Timestamp time;
 
   @Column(name = "detail" )

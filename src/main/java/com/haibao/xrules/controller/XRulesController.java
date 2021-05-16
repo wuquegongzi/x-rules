@@ -3,20 +3,21 @@ package com.haibao.xrules.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 /**
  *
- *
+ * 风控 规则引擎 统一入口
  * @author ml.c
  * @date 11:00 AM 5/6/21
  **/
 @RestController
+@RequestMapping("/xrules")
 public class XRulesController {
 
     private static Logger logger = LoggerFactory.getLogger(XRulesController.class);
-
 
     /**
      * 响应式编程的返回值必须是 Flux 或者 Mono ，两者之间可以相互转换
@@ -29,6 +30,17 @@ public class XRulesController {
 
         //just() 方法可以指定序列中包含的全部元素。
         return Mono.just("welcome!");
+    }
+
+    /**
+     * 业务风控分析
+     * @param json
+     * @return
+     */
+    @GetMapping("/req")
+    public Mono<String> req(String json) {
+
+        return Mono.just("");
     }
 
 }

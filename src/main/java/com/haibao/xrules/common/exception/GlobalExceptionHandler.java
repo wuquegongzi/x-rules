@@ -52,7 +52,6 @@ public class GlobalExceptionHandler {
     public Mono exceptionHandler(Exception e) {
         // 记录异常日志
         logger.error("[exceptionHandler]", e);
-        // 返回 ERROR Result
         return Result.fail(Mono.just(""),ResultStatusEnum.INTERNAL_SERVER_ERROR.getCode(),ResultStatusEnum.INTERNAL_SERVER_ERROR.getMessage());
     }
 }

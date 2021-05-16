@@ -100,7 +100,7 @@ mongodb本身的聚合函数统计维度，支持很多比如：max，min，sum�
 * 日志配置：logback-spring.xml
 * 规则配置：rules/*.drl，规则都是用java语言编写。
 
-> drools的详细文档，请参考官方	[http://docs.jboss.org/drools/release/6.4.0.Final/drools-docs/html_single/index.html](http://docs.jboss.org/drools/release/6.4.0.Final/drools-docs/html_single/index.html)
+> drools的详细文档，请参考官方	[http://docs.jboss.org/drools/release/7.6.0.Final/drools-docs/html_single/index.html](http://docs.jboss.org/drools/release/6.4.0.Final/drools-docs/html_single/index.html)
 
 ## 部署
 系统默认采用jar打包和运行。

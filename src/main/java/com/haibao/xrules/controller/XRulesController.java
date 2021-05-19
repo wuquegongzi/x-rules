@@ -1,7 +1,12 @@
 package com.haibao.xrules.controller;
 
+import cn.hutool.core.util.StrUtil;
+import com.haibao.xrules.common.enums.ResultStatusEnum;
+import com.haibao.xrules.common.exception.ServiceException;
+import com.haibao.xrules.service.SysConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +23,9 @@ import reactor.core.publisher.Mono;
 public class XRulesController {
 
     private static Logger logger = LoggerFactory.getLogger(XRulesController.class);
+
+    @Autowired
+    private SysConfigService configService;
 
     /**
      * 响应式编程的返回值必须是 Flux 或者 Mono ，两者之间可以相互转换
@@ -39,6 +47,10 @@ public class XRulesController {
      */
     @GetMapping("/req")
     public Mono<String> req(String json) {
+        if (StrUtil.isEmpty(json)) {
+            throw new ServiceException(ResultStatusEnum.MISSING_REQUEST_PARAM_ERROR);
+        }
+
 
         return Mono.just("");
     }

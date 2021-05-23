@@ -6,6 +6,7 @@ import com.haibao.xrules.common.base.Result;
 import com.haibao.xrules.common.enums.ResultStatusEnum;
 import com.haibao.xrules.common.exception.ServiceException;
 import com.haibao.xrules.common.factory.EventFactory;
+import com.haibao.xrules.model.SysConfig;
 import com.haibao.xrules.service.RuleEngineService;
 import com.haibao.xrules.service.SysConfigService;
 import org.slf4j.Logger;
@@ -54,7 +55,9 @@ public class XRulesController {
             throw new ServiceException(ResultStatusEnum.MISSING_REQUEST_PARAM_ERROR);
         }
         BaseEvent event = eventFactory.build(eventJson);
-        if ("ON".equals(configService.get("X_RULES_SWITCH"))) {
+
+        SysConfig sysConfig = configService.get("X_RULES_SWITCH");
+        if (null != sysConfig && "ON".equals(sysConfig.getValue())) {
             ruleEngineService.execute(event);
         }
 

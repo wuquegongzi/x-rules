@@ -1,6 +1,8 @@
 package com.haibao.xrules.model.event;
 
 import com.haibao.xrules.common.base.BaseEvent;
+import java.io.Serializable;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 登录事件
@@ -8,7 +10,8 @@ import com.haibao.xrules.common.base.BaseEvent;
  * @author ml.c
  * @date 1:52 PM 5/23/21
  **/
-public class LoginEvent extends BaseEvent {
+@Document(collection = "x_rules_events")
+public class LoginEvent extends BaseEvent  implements Serializable {
 
     public final static String MOBILE = "mobile";
 

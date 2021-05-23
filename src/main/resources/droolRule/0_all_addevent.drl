@@ -1,0 +1,22 @@
+package rules;
+
+import com.haibao.xrules.model.event.LoginEvent
+import com.haibao.xrules.service.DimensionService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+global DimensionService dimensionService
+
+dialect  "java"
+rule "0_all_addevent"
+    salience 0
+    when
+        event : LoginEvent()
+    then
+        final Logger LOGGER = LoggerFactory.getLogger("0_all_addevent 规则引擎") ;
+        LOGGER.info("参数:id="+event.getId()+";sence="+event.getScene());
+
+        dimensionService.insertEvent(event.getScene(),event);
+
+end
+

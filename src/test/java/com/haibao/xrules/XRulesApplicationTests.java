@@ -1,8 +1,11 @@
 package com.haibao.xrules;
 
+import cn.hutool.core.lang.UUID;
+import com.haibao.xrules.dao.MongoDao;
 import com.haibao.xrules.model.BlackList;
 import com.haibao.xrules.model.QueryParam;
 import com.haibao.xrules.model.RuleResult;
+import com.haibao.xrules.model.event.LoginEvent;
 import com.haibao.xrules.service.BlackListService;
 import com.haibao.xrules.service.RuleEngineService;
 import com.haibao.xrules.utils.GsonUtils;
@@ -30,8 +33,12 @@ class XRulesApplicationTests {
 
     @Resource
     private KieSession kieSession;
+
     @Resource
     private RuleEngineService ruleEngineService ;
+
+    @Resource
+    private MongoDao<LoginEvent> mongoDao;
 
 
     @Test
@@ -118,6 +125,29 @@ class XRulesApplicationTests {
             }
         }
 
+    }
+
+    @Test
+    void testMogoDB(){
+
+        LoginEvent loginEvent = new LoginEvent();
+        String id = UUID.fastUUID().toString();
+        loginEvent.setId(id);
+        loginEvent.setScene("LOGIN");
+        mongoDao.save(loginEvent.getScene(),loginEvent);
+
+        loginEvent.setMobile("15210818888");
+        mongoDao.update(loginEvent.getScene(),id,loginEvent,LoginEvent.class);
+
+        LoginEvent loginEvent1 = mongoDao.findEventById(loginEvent.getScene(),id,LoginEvent.class);
+        System.out.println("获取结果："+GsonUtils.gsonString(loginEvent1));
+
+    }
+
+    @Test
+    void testMogoDB2(){
+        LoginEvent loginEvent = mongoDao.findEventById("LOGIN","000001",LoginEvent.class);
+        System.out.println("获取结果："+GsonUtils.gsonString(loginEvent));
     }
 
 

@@ -1,6 +1,9 @@
 package com.haibao.xrules.common.base;
 
+import java.io.Serializable;
 import java.util.Date;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 事件
@@ -8,7 +11,8 @@ import java.util.Date;
  * @author ml.c
  * @date 11:46 PM 5/19/21
  **/
-public abstract class BaseEvent {
+@Document(collection = "x_rules_events")
+public abstract class BaseEvent implements Serializable {
 
     /**
      * 场景
@@ -18,6 +22,7 @@ public abstract class BaseEvent {
     /**
      * 事件id
      */
+    @Id
     private String id;
 
     /**

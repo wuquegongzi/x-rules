@@ -114,7 +114,7 @@ mongodb本身的聚合函数统计维度，支持很多比如：max，min，sum�
 	java -jar x-rules-*.jar
 
 ## 风控分析入口以及调用样例
-* 请求：http://domain/xrules/req?json=JSON.toJsonString(LoginEvent)
+* 请求：http://domain/xrules/req?json= JSON.stringify(LoginEvent)
 
 `eg:http://localhost:8080/xrules/req?json=%7b"mobile": "15210818888","scene": "LOGIN","score": 0%7d`
 

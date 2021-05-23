@@ -115,7 +115,8 @@ mongodb本身的聚合函数统计维度，支持很多比如：max，min，sum�
 
 ## 风控分析入口以及调用样例
 * 请求：http://domain/xrules/req?json=JSON.toJsonString(LoginEvent)
-eg:http://localhost:8080/xrules/req?json=%7b"mobile": "15210818888","scene": "LOGIN","score": 0%7d
+
+`eg:http://localhost:8080/xrules/req?json=%7b"mobile": "15210818888","scene": "LOGIN","score": 0%7d`
 
 * 响应：score字段代码该事件的风险值（超过100分预警）
 

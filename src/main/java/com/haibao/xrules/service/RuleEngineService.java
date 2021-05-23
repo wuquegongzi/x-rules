@@ -1,6 +1,5 @@
 package com.haibao.xrules.service;
 
-import com.haibao.xrules.common.base.BaseEvent;
 import com.haibao.xrules.model.QueryParam;
 
 /**
@@ -14,10 +13,4 @@ public interface RuleEngineService {
     void executeAddRule(QueryParam param);
 
     void executeRemoveRule(QueryParam param);
-
-    boolean removeRule(String rule);
-
-    boolean addRule(String rule);
-
-    void execute(BaseEvent event);
 }

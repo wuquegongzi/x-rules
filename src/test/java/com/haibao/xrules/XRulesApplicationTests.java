@@ -59,8 +59,6 @@ class XRulesApplicationTests {
         RuleResult resultParam = new RuleResult() ;
         kieSession.insert(resultParam) ;
         kieSession.fireAllRules() ;
-
-        System.out.println("resultParam:"+GsonUtils.gsonString(resultParam));
     }
 
     @Test

@@ -1,9 +1,7 @@
 package com.haibao.xrules.service.impl;
 
-import com.haibao.xrules.common.base.BaseEvent;
 import com.haibao.xrules.model.QueryParam;
 import com.haibao.xrules.service.RuleEngineService;
-import com.haibao.xrules.utils.GsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,6 @@ public class RuleEngineServiceImpl implements RuleEngineService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RuleEngineServiceImpl.class);
 
-
     @Override
     public void executeAddRule(QueryParam param) {
         LOGGER.info("参数数据:" + param.getParamId() + ";" + param.getParamSign());
@@ -29,22 +26,6 @@ public class RuleEngineServiceImpl implements RuleEngineService {
     @Override
     public void executeRemoveRule(QueryParam param) {
         LOGGER.info("参数数据:" + param.getParamId() + ";" + param.getParamSign());
-
-    }
-
-    @Override
-    public boolean removeRule(String rule) {
-        return false;
-    }
-
-    @Override
-    public boolean addRule(String rule) {
-        return false;
-    }
-
-    @Override
-    public void execute(BaseEvent event) {
-        LOGGER.info("开始执行：{}", GsonUtils.gsonString(event));
 
     }
 }

@@ -4,6 +4,8 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.haibao.xrules.dao.RedisDao;
 import com.haibao.xrules.mapper.BlackListRepository;
 import com.haibao.xrules.model.BlackList;
+import com.haibao.xrules.model.BlackList.EnumDimension;
+import com.haibao.xrules.model.BlackList.EnumType;
 import com.haibao.xrules.service.BlackListService;
 import com.haibao.xrules.utils.GsonUtils;
 import java.util.List;
@@ -95,5 +97,12 @@ public class BlackListServiceImpl implements BlackListService{
         }
         blackListCache.putAll(tempMap);
         logger.info("update balck_list cache success");
+    }
+
+    @Override
+    public boolean contain(EnumDimension enumDimension, EnumType enumType, String operateIp) {
+        BlackList blackList = this.get(operateIp);
+        return blackList == null ? false :
+                (blackList.getDimension().equals(enumDimension) && blackList.getType().equals(enumType));
     }
 }

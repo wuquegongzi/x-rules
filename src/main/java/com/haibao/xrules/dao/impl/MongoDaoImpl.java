@@ -5,6 +5,7 @@ import com.haibao.xrules.dao.MongoDao;
 import com.haibao.xrules.utils.GsonUtils;
 import java.util.Map;
 import javax.annotation.Resource;
+import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -51,5 +52,10 @@ public class MongoDaoImpl<T> implements MongoDao<T> {
         Query query = new Query(Criteria.where("id").is(id));
         T event = mongoTemplate.findOne(query, entityClass, collectionName);
         return event;
+    }
+
+    @Override
+    public void insert(String riskEventCollection, Document document) {
+        mongoTemplate.insert(document, riskEventCollection);
     }
 }

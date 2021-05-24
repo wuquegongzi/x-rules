@@ -1,0 +1,29 @@
+package rules;
+
+import com.haibao.xrules.model.event.LoginEvent
+import com.haibao.xrules.model.BlackList
+import com.haibao.xrules.service.DimensionService
+import com.haibao.xrules.service.BlackListService
+
+
+global BlackListService blackListService
+global DimensionService dimensionService
+
+rule "997_all_blackip"
+    salience 997
+    lock-on-active true
+    when
+          event:LoginEvent()
+    then
+        if(blackListService.contain(BlackList.EnumDimension.IP,BlackList.EnumType.WHITE,event.getOperateIp())){
+            dimensionService.insertEvent(event.getScene(),event);
+            delete(event);
+        }
+
+        if(blackListService.contain(BlackList.EnumDimension.IP,BlackList.EnumType.BLACK,event.getOperateIp())){
+            event.setScore(100);
+            dimensionService.insertEvent(event.getScene(),event);
+            dimensionService.insertRiskEvent(event,"黑名单ip");
+            delete(event);
+        }
+end

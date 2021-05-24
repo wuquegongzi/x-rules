@@ -1,0 +1,19 @@
+package rules;
+
+import com.haibao.xrules.common.base.BaseEvent
+import com.haibao.xrules.service.DimensionService
+
+global DimensionService dimensionService
+
+rule "1_all_publish"
+    salience 1
+    lock-on-active true
+    when
+        event:BaseEvent()
+    then
+        if(event.getScore()>=100){
+            dimensionService.insertRiskEvent(event,"预警");
+        }
+
+end
+

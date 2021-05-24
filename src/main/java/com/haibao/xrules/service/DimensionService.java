@@ -8,10 +8,4 @@ public interface DimensionService<T> {
      */
     void insertEvent(String collectionName ,T event);
 
-    /**
-     * 可疑事件入库
-     * @param event
-     * @param rule
-     */
-    void insertRiskEvent(T event, String rule);
 }

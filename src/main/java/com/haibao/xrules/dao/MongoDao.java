@@ -23,5 +23,4 @@ public interface MongoDao<T> {
 
     T findEventById(String collectionName, String id, Class<T> entityClass);
 
-    void insert(String riskEventCollection, Document document);
 }

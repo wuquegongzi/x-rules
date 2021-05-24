@@ -1,8 +1,6 @@
 package com.haibao.xrules.service;
 
 import com.haibao.xrules.model.BlackList;
-import com.haibao.xrules.model.BlackList.EnumDimension;
-import com.haibao.xrules.model.BlackList.EnumType;
 import java.util.List;
 import org.springframework.data.redis.connection.MessageListener;
 
@@ -44,6 +42,4 @@ public interface BlackListService{
      * 全量更新缓存
      */
     void updateCache();
-
-    boolean contain(EnumDimension ip, EnumType white, String operateIp);
 }

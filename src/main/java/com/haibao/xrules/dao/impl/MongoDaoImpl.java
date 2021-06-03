@@ -1,6 +1,5 @@
 package com.haibao.xrules.dao.impl;
 
-import com.haibao.xrules.common.base.BaseEvent;
 import com.haibao.xrules.dao.MongoDao;
 import com.haibao.xrules.utils.GsonUtils;
 import java.util.Map;

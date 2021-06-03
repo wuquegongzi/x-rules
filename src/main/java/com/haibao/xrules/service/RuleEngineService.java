@@ -11,10 +11,6 @@ import com.haibao.xrules.model.QueryParam;
  **/
 public interface RuleEngineService {
 
-    void executeAddRule(QueryParam param);
-
-    void executeRemoveRule(QueryParam param);
-
     boolean removeRule(String rule);
 
     boolean addRule(String rule);

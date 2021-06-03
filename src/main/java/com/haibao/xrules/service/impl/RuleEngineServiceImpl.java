@@ -44,24 +44,18 @@ public class RuleEngineServiceImpl implements RuleEngineService {
     }
 
     @Override
-    public void executeAddRule(QueryParam param) {
-        LOGGER.info("参数数据:" + param.getParamId() + ";" + param.getParamSign());
-
-    }
-
-    @Override
-    public void executeRemoveRule(QueryParam param) {
-        LOGGER.info("参数数据:" + param.getParamId() + ";" + param.getParamSign());
-
-    }
-
-    @Override
     public boolean removeRule(String rule) {
+
+        //todo
+
         return false;
     }
 
     @Override
     public boolean addRule(String rule) {
+
+        //todo
+
         return false;
     }
 

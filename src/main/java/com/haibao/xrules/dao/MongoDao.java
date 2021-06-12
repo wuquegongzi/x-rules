@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,4 +25,6 @@ public interface MongoDao<T> {
     T findEventById(String collectionName, String id, Class<T> entityClass);
 
     void insert(String riskEventCollection, Document document);
+
+    long count(String collectionName, Query filter);
 }

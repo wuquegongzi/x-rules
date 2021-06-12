@@ -14,6 +14,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "x_rules_events")
 public abstract class BaseEvent implements Serializable {
 
+    public final static String OPERATETIME = "operateTime";
+
     /**
      * 场景
      */
@@ -67,4 +69,26 @@ public abstract class BaseEvent implements Serializable {
     public void setScore(int score) {
         this.score = score;
     }
+
+
+    /**
+     * 计算事件评分
+     *
+     * @param count      当前值
+     * @param level      阀值
+     * @param levelScore 阀值评分
+     * @param perScore   超过阀值以上，每个评分
+     * @return 是否达到阈值
+     */
+    public boolean addScore(int count, int level, int levelScore, int perScore) {
+        if (level <= 0 || levelScore <= 0 || perScore < 0) {
+            return false;
+        }
+        if (count >= level) {
+            this.score += levelScore + (count - level) * perScore;
+            return true;
+        }
+        return false;
+    }
+
 }

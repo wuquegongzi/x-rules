@@ -57,4 +57,15 @@ public class MongoDaoImpl<T> implements MongoDao<T> {
     public void insert(String riskEventCollection, Document document) {
         mongoTemplate.insert(document, riskEventCollection);
     }
+
+    /**
+     * 统计次数
+     * @param collectionName
+     * @param filter
+     * @return
+     */
+    @Override
+    public long count(String collectionName, Query filter) {
+        return mongoTemplate.count(filter,collectionName);
+    }
 }

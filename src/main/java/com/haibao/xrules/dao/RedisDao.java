@@ -1,12 +1,16 @@
 package com.haibao.xrules.dao;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -578,6 +582,20 @@ public class RedisDao {
         }
     }
 
+
+   private static DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+
+    static {
+        // 指定 lua 脚本
+        redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("redis/x-rules.lua")));
+        // 指定返回类型
+        redisScript.setResultType(Long.class);
+    }
+
+
+    public <T> T evalsha(String functionName, String lockKey, String[] args) {
+        return (T)redisTemplate.execute(redisScript, Collections.singletonList(lockKey),args);
+    }
 }
 
 
